@@ -1,0 +1,2 @@
+killall xborders
+xborders -c /home/Fuya/.config/xborders/config.json
