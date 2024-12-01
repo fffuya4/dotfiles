@@ -1,0 +1,62 @@
+variablefunction() {
+    local rc_file=$1
+    local var_name=$2
+    local var_value=$3
+
+    # Check if the variable is already set in the rc file
+    if grep -q "^set \$$var_name " "$rc_file"; then
+        sed -i "s|^set \$$var_name .*|set \$$var_name $var_value|" "$rc_file"
+    else
+        echo "set \$$var_name $var_value" >> "$rc_file"
+    fi
+}
+
+Y='\033[1;33m'
+
+echo -e  "${Y}Do you want to see all wallpaper names? (y/n)"
+read answer
+answer="${answer:-Y}"
+if [[ $answer == "y" || $answer == "Y" ]]; then
+    ls -v /home/Fuya/İndirilenler/wallpaper
+    sleep 2
+else
+    echo "k"
+fi
+
+echo -e "${Y}Enter the wallpaper's name:"
+read filename
+
+# Extract the number from the filename (remove the extension)
+number=$(echo "$filename" | sed 's/\([0-9]*\)\.[a-zA-Z]*$/\1/')
+
+# Check if the extracted number is a valid number between 0 and 219
+while [[ ! "$number" =~ ^[0-9]+$ || "$number" -lt 0 || "$number" -gt 219 ]]; do
+    echo "Invalid wallpaper. They are between 0 and 252:"
+    read filename
+    number=$(echo "$filename" | sed 's/\([0-9]*\)\.[a-zA-Z]*$/\1/')
+done
+
+echo "kk this is the wallpaper you selected: $number"
+sleep 0.5
+echo "now ill do my stuff. . ."
+sleep 0.5
+
+export wallpapername="$filename"
+echo "exported variable. . ."
+sleep 0.5
+
+variablefunction "/home/Fuya/.config/i3/config" "wallpapername" "$filename"
+# variablefunction "/root/.bashrc" "wallpapername" "$filename"
+echo "Added variable to the rc file. . ."
+sleep 0.5
+
+feh --bg-fill /home/Fuya/İndirilenler/wallpaper/$wallpapername
+echo "Applied the wallpaper. . ."
+sleep 0.2
+echo "Done!!"
+sleep 0.2
+echo "Bye!!"
+
+exit
+
+
