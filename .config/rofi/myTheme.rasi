@@ -1,0 +1,6 @@
+* {
+	background: #69485e;
+	selected-active-foreground: #d291bc;
+	normal-foreground: #d291bc;
+	normal-background: #69485e;
+}
