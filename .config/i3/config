@@ -1,0 +1,186 @@
+for_window [class="^.*"] border pixel 0
+
+set $mod Mod4
+
+set $wallpapername 105.jpg
+
+font pango:DejaVu Sans Mono 8
+
+exec --no-startup-id dex --autostart --environment i3
+exec feh --bg-fill /home/Fuya/İndirilenler/wallpaper/$wallpapername
+exec picom -b
+exec_always dunst -conf /home/Fuya/.config/dunst/dunstrc
+exec_always /home/Fuya/.config/i3/launchxborder
+# exec --no-startup-id xset s off
+# exec --no-startup-id xset -dpms
+
+exec_always /home/Fuya/.config/i3/launchpolybar
+exec_always dunstify "Welcome back senpai!!"
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id nm-applet
+
+gaps outer 5
+gaps inner 10
+
+floating_modifier $mod
+tiling_drag modifier titlebar
+
+for_window [class="pavucontrol"] floating enable
+for_window [class="kitty"] floating enable
+for_window [class="Tk"] floating enable
+for_window [class="spectacle"] floating enable
+for_window [class="zen-browser"] border pixel 0
+for_window [class="discord"] border pixel 0
+for_window [class="spotify"] border pixel 0
+
+bindsym $mod+q exec kitty
+bindsym $mod+d exec discord --proxy-server="socks5://127.0.0.1:9050" --ignore-certificate-errors --disable-http2
+bindsym $mod+b exec zen-browser
+bindsym $mod+s exec spotify
+bindsym $mod+c kill
+# bindsym $mod+r exec --no-startup-id dmenu_run
+# bindsym $mod+r exec --no-startup-id jgmenu_run
+bindsym $mod+r exec --no-startup-id rofi -show drun
+bindsym $mod+Shift+r exec --no-startup-id rofi -show run
+bindsym $mod+e exec dolphin
+bindsym $mod+o exec pavucontrol
+bindsym $mod+w exec feh --bg-fill /home/Fuya/İndirilenler/wallpaper/$wallpapername
+bindsym Print exec spectacle
+bindsym $mod+Print exec spectacle --region
+bindsym $mod+p exec picom -b
+bindsym $mod+Shift+p exec killall picom
+bindsym $mod+Control+p exec killall polybar && polybar
+
+bindsym $mod+Left focus left
+bindsym $mod+Right focus right
+bindsym $mod+Up focus up
+bindsym $mod+Down focus down
+
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Down move down
+
+bindsym $mod+Shift+h split h
+bindsym $mod+Shift+v split v
+bindsym $mod+f fullscreen toggle
+
+bindsym $mod+Shift+s layout stacking
+bindsym $mod+Shift+w layout tabbed
+bindsym $mod+Shift+e layout toggle split
+bindsym $mod+v floating toggle
+
+# workspace variables
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+set $ws11 "11"
+set $ws12 "12"
+set $ws13 "13"
+set $ws14 "14"
+set $ws15 "15"
+set $ws16 "16"
+set $ws17 "17"
+set $ws18 "18"
+set $ws19 "19"
+set $ws20 "20"
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+bindsym $mod+mod2+KP_1 workspace number $ws11
+bindsym $mod+mod2+KP_2 workspace number $ws12
+bindsym $mod+mod2+KP_3 workspace number $ws13
+bindsym $mod+mod2+KP_4 workspace number $ws14
+bindsym $mod+mod2+KP_5 workspace number $ws15
+bindsym $mod+mod2+KP_6 workspace number $ws16
+bindsym $mod+mod2+KP_7 workspace number $ws17
+bindsym $mod+mod2+KP_8 workspace number $ws18
+bindsym $mod+mod2+KP_9 workspace number $ws19
+bindsym $mod+mod2+KP_0 workspace number $ws20
+
+
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Control+Shift+c restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Mod1+c exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym scedilla resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+Mod1+r mode "default"
+}
+
+bindsym $mod+Mod1+r mode "resize"
+
+bindsym control+Mod1+Delete exec python /home/Fuya/logoutpop/logout.py
+
+
+client.focused          #D291BC #D291BC #FFFFFF #D291BC   #D291BC
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+# Touchpad controls
+bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
